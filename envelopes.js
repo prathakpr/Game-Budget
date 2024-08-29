@@ -74,6 +74,20 @@ const deleteGameDetails = (info) =>{
     return envelopes.splice(id, 1);
 }
 
+// function to create envelopes
+const createGame = game =>{
+    const newGame = {
+
+        game : game,
+        release : 2024,
+        platform : 'Console and Pc',
+        gameHours : 4,
+        gameBudget : '200000 INR'
+    }
+
+    envelopes.push(game);
+}
+
 // envelope params set here
 
 envelopesRouter.param('game', (req, res, next, game)=>{
@@ -106,8 +120,9 @@ envelopesRouter.post('/transfer/:game', (req, res, next)=>{
     res.status(200).send(`transfer game details successfully to env 2 as = ${JSON.stringify(envelopesTwo)}`);
 });
 
-envelopesRouter.post('/', (req, res, next)=>{
-    res.status(201).send('apun post hai'); 
+envelopesRouter.post('/create/', (req, res, next)=>{
+    envelopes.push(req.query);
+    res.status(201).send(`created new game details successfully as ${JSON.stringify(envelopes)}`); 
 });
 
 // below I have added get routes
