@@ -53,7 +53,14 @@ const gameDetails = (game) =>{
     throw err;
 }
 
-//function to change budget below
+// function to delete a game details by its name
+
+const deleteGameDetails = (info) =>{
+    const id = envelopes.indexOf(info);
+    return envelopes.splice(id, 1);
+}
+
+// envelope params set here
 
 envelopesRouter.param('game', (req, res, next, game)=>{
     try{
@@ -65,11 +72,7 @@ envelopesRouter.param('game', (req, res, next, game)=>{
 })
 
 
-envelopesRouter.post('/', (req, res, next)=>{
-    res.status(201).send('apun post hai'); 
-});
-
-// below I have added updates routes
+// below I have added put routes
 
 envelopesRouter.put('/change/:game/:budget' ,(req, res, next)=>{
     const num = Number(req.params.budget)
@@ -81,6 +84,11 @@ envelopesRouter.put('/change/:game/:budget' ,(req, res, next)=>{
     const err = new Error('give a valid number please');
     next(err);
 
+});
+
+// I have added post routes here
+envelopesRouter.post('/', (req, res, next)=>{
+    res.status(201).send('apun post hai'); 
 });
 
 // below I have added get routes
@@ -95,6 +103,12 @@ envelopesRouter.get('/:game', (req, res, next)=>{
 
 envelopesRouter.get('/all', (req, res, next)=>{
     res.status(200).send(envelopes);
+})
+
+// below I have added delete routes
+envelopesRouter.delete('/:game', (req, res, next)=>{
+    deleteGameDetails(req.info);
+    res.status(200).send('deleted successfully');
 })
 
 module.exports = envelopesRouter ;
