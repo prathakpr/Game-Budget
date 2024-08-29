@@ -53,6 +53,8 @@ const gameDetails = (game) =>{
     throw err;
 }
 
+//function to change budget below
+
 envelopesRouter.param('game', (req, res, next, game)=>{
     try{
         req.info = gameDetails(game);
@@ -62,9 +64,30 @@ envelopesRouter.param('game', (req, res, next, game)=>{
     }
 })
 
+
 envelopesRouter.post('/', (req, res, next)=>{
     res.status(201).send('apun post hai'); 
 });
+
+// below I have added updates routes
+
+envelopesRouter.put('/change/:game/:budget' ,(req, res, next)=>{
+    const num = Number(req.params.budget)
+    if(!isNaN(num)){
+        req.info.gameBudget = `${num} INR`;
+        res.status(200).send(`Done Successefully, new info is ${JSON.stringify(req.info)}`);
+        return next();
+    }
+    const err = new Error('give a valid number please');
+    next(err);
+
+});
+
+// below I have added get routes
+
+envelopesRouter.get('/:game/budget' ,(req, res, next)=>{
+    res.status(200).send(`${req.info.game} game budget is : ${JSON.stringify(req.info.gameBudget)}`); 
+})
 
 envelopesRouter.get('/:game', (req, res, next)=>{
     res.status(200).send(`yes, game details are : ${JSON.stringify(req.info)}`);

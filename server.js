@@ -11,7 +11,7 @@ app.use('/envelopes', envelopesRoters);
 //ERROR handler below
 
 app.use((err, req, res, next)=>{
-    res.status(err.status).send(err.message);
+    res.status(err.status || 404).send(err.message);
 })
 
 app.listen(PORT, (req, res, next)=>{
