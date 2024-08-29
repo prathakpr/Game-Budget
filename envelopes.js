@@ -40,6 +40,20 @@ const envelopes = [
         gameBudget : '200000 INR'
     }];
 
+const envelopesTwo = [
+    { game : 'RDR 2',
+        release : 2018,
+        platform : 'Console and Pcs',
+        gameHours : 64,
+        gameBudget : '$250M'},
+    {
+        game : 'GTA 5',
+        release : 2013,
+        platform : 'Console and Pc',
+        gameHours : 4,
+        gameBudget : '200000 INR'
+    }];
+
 // function to find the game details by its name
 
 const gameDetails = (game) =>{
@@ -87,6 +101,11 @@ envelopesRouter.put('/change/:game/:budget' ,(req, res, next)=>{
 });
 
 // I have added post routes here
+envelopesRouter.post('/transfer/:game', (req, res, next)=>{
+    envelopesTwo.push(req.info);
+    res.status(200).send(`transfer game details successfully to env 2 as = ${JSON.stringify(envelopesTwo)}`);
+});
+
 envelopesRouter.post('/', (req, res, next)=>{
     res.status(201).send('apun post hai'); 
 });
