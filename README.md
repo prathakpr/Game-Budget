@@ -1,6 +1,8 @@
 # Personal Budget Project as Game Budget
 ![SS (3)](https://github.com/prathakpr/Game-Budget/blob/main/Postman/ss.png)
 #
+This project includes an API developed to provide details about the games created by Anjaniputra Games Studio, organized as envelopes, and envelopes2 with other games nested inside, like RDR2 and GTA 5. The API allows us to set, delete, and retrieve information such as game budgets, platforms, release dates, and much more.
+
 Project Objectives:
 
 1. Build an API using Node.js and Express
